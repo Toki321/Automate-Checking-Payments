@@ -1,14 +1,20 @@
 import pandas as pd
 
 # Read an Excel file
-df = pd.read_excel('excelFile.xlsx')
+df = pd.read_excel('excelFile.xlsx', sheet_name='Dicembre 2021')
 
-# Create an empty array to store the data from the first column
-result_array = []
+# Fill the missing values in the first column with the previous non-null value
+df.iloc[:, 0].fillna(method='ffill', inplace=True)
 
-# Iterate over the rows of the DataFrame
-for index, row in df.iterrows():
-    # Check if the value in the second column is 314 or 318
-    if row['B'] == 314 or row['B'] == 318:
-        # Append the data from the first column to the result array
-        result_array.append(row['A'])
+# Create a boolean mask to filter the rows where the second column is 314 or 318
+mask = (df.iloc[:, 1] == 314) | (df.iloc[:, 1] == 318)
+
+# Use boolean mask to filter the rows
+filtered_df = df[mask]
+
+# Extract the values from the first column
+result_array = filtered_df.iloc[:, 0].tolist()
+
+
+result_array_final = list(set(result_array))
+print(result_array_final)
