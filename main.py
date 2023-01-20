@@ -3,6 +3,7 @@ import os
 import PyPDF2
 
 from helpers import isMatch
+from test import december_314
 
 # Read an Excel file
 df = pd.read_excel('excelFile.xlsx', sheet_name='Dicembre 2021')
@@ -35,38 +36,46 @@ result_array_318 = list(set(result_array_318))
 new_result_array_314 = []
 new_result_array_318 = []
 
-for i in range(len(result_array_314)):
-    if '-' in result_array_314[i]:
-        split_string = result_array_314[i].split('-')
-        for string in split_string:
-            new_result_array_318.append(string)
-    else:
-        new_result_array_314.append(result_array_314[i])
 
-for i in range(len(result_array_318)):
-    if '-' in result_array_318[i]:
-        split_string = result_array_318[i].split('-')
-        for string in split_string:
-            new_result_array_318.append(string)
-    else:
-        new_result_array_318.append(result_array_318[i])
+dividedByDash314 = []
 
-# print(new_result_array_314)
-# print(new_result_array_318)
+for x in result_array_314:
+    if '-' in x:
+        split_string = x.split('-')
+        for string in split_string:
+            dividedByDash314.append(string)
+
+
+result_array_314.extend(dividedByDash314)
+
+unique_array_314 = list(set(result_array_314))
+
+
+dividedByDash318 = []
+
+for x in result_array_318:
+    if '-' in x:
+        split_string = x.split('-')
+        for string in split_string:
+            dividedByDash318.append(string)
+
+
+result_array_318.extend(dividedByDash318)
+
+unique_array_318 = list(set(result_array_318))
+
 
 pdf_folder = './DDT'
 
 fileList = os.listdir('./DDT')
 
-
 # words to search for in the pdfs
-search_word_314 = 'tel'
+search_word_314 = 'tel.'
 search_word_318 = 'idraulica'
-
 
 doesNOTContain314 = []
 
-for word in new_result_array_314:
+for word in unique_array_314:
     for file in fileList:
         if isMatch(word, file):
             pdf_path = os.path.join(pdf_folder, file)
@@ -76,4 +85,19 @@ for word in new_result_array_314:
                 if (search_word_314 in pdf_text) == False:
                     print(f'{file} doesnt contains the word {search_word_314}')
                     doesNOTContain314.append(file)
+                    break
+
+
+doesNOTContain318 = []
+
+for word in unique_array_318:
+    for file in fileList:
+        if isMatch(word, file):
+            pdf_path = os.path.join(pdf_folder, file)
+            reader = PyPDF2.PdfReader(pdf_path)
+            for page in reader.pages:
+                pdf_text = page.extract_text()
+                if (search_word_318 in pdf_text) == False:
+                    print(f'{file} doesnt contains the word {search_word_318}')
+                    doesNOTContain318.append(file)
                     break
