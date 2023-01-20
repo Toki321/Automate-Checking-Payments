@@ -2,6 +2,8 @@ import pandas as pd
 import os
 import PyPDF2
 
+from helpers import isMatch
+
 # Read an Excel file
 df = pd.read_excel('excelFile.xlsx', sheet_name='Dicembre 2021')
 
@@ -49,22 +51,29 @@ for i in range(len(result_array_318)):
     else:
         new_result_array_318.append(result_array_318[i])
 
-print(new_result_array_314)
-print(new_result_array_318)
+# print(new_result_array_314)
+# print(new_result_array_318)
 
-pdf_folder = './'
+pdf_folder = './DDT'
+
+fileList = os.listdir('./DDT')
+
 
 # words to search for in the pdfs
 search_word_314 = 'tel'
 search_word_318 = 'idraulica'
 
-# search for 314 array pdfs
-# for pdf_name in new_result_array_314:
-#     pdf_path = os.path.join(pdf_folder, f"{pdf_name}.pdf")
-#     pdf_file = open(pdf_path, 'rb')
-#     pdf_reader = PyPDF2.PdfFileReader(pdf_file)
-#     pdf_file.close()
-#     for page in range(pdf_reader.getNumPages()):
-#         pdf_text = pdf_reader.getPage(page).extractText()
-#         if search_word_314 in pdf_text:
-#             print(f'{pdf_name}.pdf contains the word {
+
+doesNOTContain314 = []
+
+for word in new_result_array_314:
+    for file in fileList:
+        if isMatch(word, file):
+            pdf_path = os.path.join(pdf_folder, file)
+            reader = PyPDF2.PdfReader(pdf_path)
+            for page in reader.pages:
+                pdf_text = page.extract_text()
+                if (search_word_314 in pdf_text) == False:
+                    print(f'{file} doesnt contains the word {search_word_314}')
+                    doesNOTContain314.append(file)
+                    break
