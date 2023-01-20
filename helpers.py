@@ -24,3 +24,14 @@ def isMatch(name, file):
         return True
     else:
         return False
+
+
+def remove_letters(string):
+    return ''.join([c for c in string if c.isdigit()])
+
+
+def removedLettersArr(array):
+    new_arr = []
+    for string in array:
+        new_arr.append(remove_letters(string))
+    return new_arr

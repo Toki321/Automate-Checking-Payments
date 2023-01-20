@@ -2,8 +2,8 @@ import pandas as pd
 import os
 import PyPDF2
 
-from helpers import isMatch
-from test import december_314
+from helpers import isMatch, remove_letters
+from helpers import removedLettersArr
 
 # Read an Excel file
 df = pd.read_excel('excelFile.xlsx', sheet_name='Dicembre 2021')
@@ -64,6 +64,9 @@ result_array_318.extend(dividedByDash318)
 
 unique_array_318 = list(set(result_array_318))
 
+final_array_314 = removedLettersArr(unique_array_314)
+final_array_318 = removedLettersArr(unique_array_318)
+
 
 pdf_folder = './DDT'
 
@@ -75,7 +78,7 @@ search_word_318 = 'idraulica'
 
 doesNOTContain314 = []
 
-for word in unique_array_314:
+for word in final_array_314:
     for file in fileList:
         if isMatch(word, file):
             pdf_path = os.path.join(pdf_folder, file)
@@ -90,7 +93,7 @@ for word in unique_array_314:
 
 doesNOTContain318 = []
 
-for word in unique_array_318:
+for word in final_array_318:
     for file in fileList:
         if isMatch(word, file):
             pdf_path = os.path.join(pdf_folder, file)
@@ -101,3 +104,11 @@ for word in unique_array_318:
                     print(f'{file} doesnt contains the word {search_word_318}')
                     doesNOTContain318.append(file)
                     break
+
+# f314 = open("314december2021.txt", "w")
+# for file in doesNOTContain314:
+#     f314.write(file + "\n")
+
+# f318 = ("318december2021.txt", "w")
+# for file in doesNOTContain318:
+#     f314.write(file + "\n")
