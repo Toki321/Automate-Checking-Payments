@@ -3,13 +3,13 @@ import pandas as pd
 import os
 import PyPDF2
 
-from helpers import isMatch, splitByDash, removeStringsWithDash
+from helpers import splitByDash, removeStringsWithDash
 
 
 def getArrThatContains314or318(number):
 
     # Read an Excel file
-    df = pd.read_excel('excelFile.xlsx', sheet_name='Dicembre 2021')
+    df = pd.read_excel('excelFile.xlsx', sheet_name='Giugno 2022')
 
     # Fill the missing values in the first column with the previous non-null value
     df.iloc[:, 0].fillna(method='ffill', inplace=True)

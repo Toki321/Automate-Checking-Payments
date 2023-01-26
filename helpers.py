@@ -11,7 +11,7 @@ def extractNumber(file):
                 number = file[file.index("-") + 1: file.index("-")]
                 return number
             except:
-                print(file)
+                print("what")
 
 
 def isMatch(name, file):
@@ -24,6 +24,20 @@ def isMatch(name, file):
 
 def removeStringsWithDash(arr):
     return [x for x in arr if x.find('-') == -1]
+
+
+def remove_last_letter(string):
+    if string[-1].isalpha():
+        return string[:-1]
+    else:
+        return string
+
+
+def remove_after_dash(string):
+    if '-' in string:
+        return string.split('-')[0]
+    else:
+        return string
 
 
 def splitByDash(array):
@@ -43,9 +57,6 @@ def isSearchWordsContainedInText(wordsArr, text):
 
     for searchWord in wordsArr:
         if (searchWord in text):
-            count += 1
+            return True
 
-    if count != len(wordsArr):
-        return False
-    else:
-        return True
+    return False
