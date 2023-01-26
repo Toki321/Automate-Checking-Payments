@@ -26,12 +26,17 @@ def isMatch(name, file):
         return False
 
 
-def remove_letters(string):
-    return ''.join([c for c in string if c.isdigit()])
+def removeStringsWithDash(arr):
+    return [x for x in arr if x.find('-') == -1]
 
 
-def removedLettersArr(array):
-    new_arr = []
-    for string in array:
-        new_arr.append(remove_letters(string))
-    return new_arr
+def splitByDash(array):
+    dividevByDashArr = []
+
+    for x in array:
+        if '-' in x:
+            split_string = x.split('-')
+            for string in split_string:
+                dividevByDashArr.append(string)
+
+    return dividevByDashArr

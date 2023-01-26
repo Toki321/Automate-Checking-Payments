@@ -3,3 +3,4 @@ excelFile.xlsx
 .~lock.excelFile.xlsx#
 DDT
 DDT.zip
+__pycache__
