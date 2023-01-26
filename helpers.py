@@ -1,7 +1,3 @@
-import os
-import PyPDF2
-
-
 def extractNumber(file):
     try:
         number = file[file.index("-") + 1: file.index("_")]
@@ -40,3 +36,16 @@ def splitByDash(array):
                 dividevByDashArr.append(string)
 
     return dividevByDashArr
+
+
+def isSearchWordsContainedInText(wordsArr, text):
+    count = 0
+
+    for searchWord in wordsArr:
+        if (searchWord in text):
+            count += 1
+
+    if count != len(wordsArr):
+        return False
+    else:
+        return True
