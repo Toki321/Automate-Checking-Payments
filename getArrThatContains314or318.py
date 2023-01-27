@@ -3,13 +3,13 @@ import pandas as pd
 import os
 import PyPDF2
 
-from helpers import splitByDash, removeStringsWithDash
+from helpers import removeStringsWithDash, splitByDashOrSlash
 
 
 def getArrThatContains314or318(number):
 
     # Read an Excel file
-    df = pd.read_excel('excelFile.xlsx', sheet_name='Giugno 2022')
+    df = pd.read_excel('excelFile.xlsx', sheet_name='Dicembre 2021')
 
     # Fill the missing values in the first column with the previous non-null value
     df.iloc[:, 0].fillna(method='ffill', inplace=True)
@@ -27,7 +27,8 @@ def getArrThatContains314or318(number):
     containsArr = [str(x) for x in containsArr]
 
     # Get the numbers with dashes in between them and append them to arr
-    containsSplitByDashArr = splitByDash(containsArr)
+    containsSplitByDashArr = splitByDashOrSlash(containsArr)
+
     containsArr.extend(containsSplitByDashArr)
 
     # Remove the strings with dashes (they were splitted into multiple strings and appended above)

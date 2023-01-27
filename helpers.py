@@ -1,17 +1,11 @@
-def extractNumber(file):
-    try:
-        number = file[file.index("-") + 1: file.index("_")]
-        return number
-    except:
-        try:
-            number = file[file.index("-") + 1: file.index(" ")]
-            return number
-        except:
-            try:
-                number = file[file.index("-") + 1: file.index("-")]
-                return number
-            except:
-                print("what")
+import re
+
+
+def extractNumber(fileName):
+    match = re.search(r"-(\d+)", fileName)
+    if match:
+        return match.group(1)
+    return None
 
 
 def isMatch(name, file):
@@ -40,16 +34,20 @@ def remove_after_dash(string):
         return string
 
 
-def splitByDash(array):
-    dividevByDashArr = []
+def splitByDashOrSlash(array):
+    dividevByDashOrSlashArr = []
 
     for x in array:
         if '-' in x:
             split_string = x.split('-')
             for string in split_string:
-                dividevByDashArr.append(string)
+                dividevByDashOrSlashArr.append(string)
+        elif '/' in x:
+            split_string = x.split('/')
+            for string in split_string:
+                dividevByDashOrSlashArr.append(string)
 
-    return dividevByDashArr
+    return dividevByDashOrSlashArr
 
 
 def isSearchWordsContainedInText(wordsArr, text):

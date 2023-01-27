@@ -1,4 +1,5 @@
 import os
+from threading import Thread
 
 from getArrThatContains314or318 import getArrThatContains314or318
 from getArrThatDoesntContainNeededWords import doesntContainWordsArr
@@ -16,17 +17,23 @@ fileNamesList = os.listdir('./DDT')
 
 file_names_dict = {}
 
+
 for fileName in fileNamesList:
+
+    key = int(extractNumber(fileName=fileName))
+
+    fileNameArr = []
+    fileNameArr.append(fileName)
+
     try:
-        number = extractNumber(fileName)
-        number = remove_last_letter(number)
-        key = int(number)
+        if file_names_dict[key] != None:
+            file_names_dict[key].append(fileName)
     except:
-        key = int(remove_after_dash(
-            remove_last_letter(extractNumber(fileName))))
+        file_names_dict[key] = fileNameArr
 
-    file_names_dict[key] = fileName
 
+# with open("file_names_dict.txt", "w") as f:
+#     f.write(file_names_dict)
 
 searchWords314 = ['tel.', 'preavviso', 'Preavviso', "Tel."]
 searchWords318 = ['idraulica', 'Idraulica']
@@ -38,7 +45,7 @@ doesnNotContainArr314 = doesntContainWordsArr(
 
 doesnNotContainArr314 = list(set(doesnNotContainArr314))
 
-with open("314Giugno 2022.txt", "w") as f:
+with open("314Dicembre 2021.txt", "w") as f:
     for string in doesnNotContainArr314:
         f.write(string + '\n')
 ###
@@ -50,7 +57,7 @@ doesnNotContainArr318 = doesntContainWordsArr(
 
 doesnNotContainArr318 = list(set(doesnNotContainArr318))
 
-with open("318Giugno 2022.txt", "w") as f:
+with open("318Dicembre 2021.txt", "w") as f:
     for string in doesnNotContainArr318:
         f.write(string + '\n')
 ###
