@@ -17,14 +17,30 @@ def isMatch(name, file):
 
 
 def removeStringsWithDash(arr):
-    return [x for x in arr if x.find('-') == -1]
+    for string in arr:
+        if '-' in string or '/' in string:
+            arr.remove(string)
+
+    return arr
 
 
 def remove_last_letter(string):
-    if string[-1].isalpha():
-        return string[:-1]
-    else:
-        return string
+    try:
+        if not string[-1].isdigit():
+            return string[:-1]
+        else:
+            return string
+    except:
+        print("string index out of range ", string)
+
+
+def remove_last_letter_arr(arr):
+    arrNew = []
+
+    for x in arr:
+        arrNew.append(remove_last_letter(x))
+
+    return arrNew
 
 
 def remove_after_dash(string):
@@ -46,6 +62,12 @@ def splitByDashOrSlash(array):
             split_string = x.split('/')
             for string in split_string:
                 dividevByDashOrSlashArr.append(string)
+        elif '+' in x:
+            split_string = x.split('+')
+            for string in split_string:
+                dividevByDashOrSlashArr.append(string)
+        else:
+            dividevByDashOrSlashArr.append(x)
 
     return dividevByDashOrSlashArr
 
@@ -58,3 +80,8 @@ def isSearchWordsContainedInText(wordsArr, text):
             return True
 
     return False
+
+
+arr = removeStringsWithDash(['2204696-2204697', '23322'])
+
+print(arr)

@@ -1,15 +1,13 @@
 import numpy as np
 import pandas as pd
-import os
-import PyPDF2
 
-from helpers import removeStringsWithDash, splitByDashOrSlash
+from helpers import remove_last_letter_arr, removeStringsWithDash, splitByDashOrSlash
 
 
-def getArrThatContains314or318(number):
+def getArrThatContains314or318(number, sheetName):
 
     # Read an Excel file
-    df = pd.read_excel('excelFile.xlsx', sheet_name='Dicembre 2021')
+    df = pd.read_excel('excelFile.xlsx', sheet_name=sheetName)
 
     # Fill the missing values in the first column with the previous non-null value
     df.iloc[:, 0].fillna(method='ffill', inplace=True)
@@ -33,6 +31,10 @@ def getArrThatContains314or318(number):
 
     # Remove the strings with dashes (they were splitted into multiple strings and appended above)
     containsArr = removeStringsWithDash(containsArr)
+
+    # Those with letters last in the form of '4792A', remove the last letter
+
+    containsArr = remove_last_letter_arr(containsArr)
 
     # Remove duplicates
     containsArr = list(set(containsArr))
