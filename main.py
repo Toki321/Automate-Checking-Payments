@@ -3,15 +3,14 @@ from threading import Thread
 
 from getArrThatContains314or318 import getArrThatContains314or318
 from getArrThatDoesntContainNeededWords import doesntContainWordsArr
-from helpers import extractNumber, remove_after_dash, remove_last_letter
+from helpers import extractNumber
 
 # "Gennaio 2022", "Febbraio 2022",
-sheetNamesArr = ["Marzo 2022",
+sheetNamesArr = ["Gennaio 2022", "Febbraio 2022", "Marzo 2022",
                  "Aprile 2022", "Maggio 2022", "Giugno 2022", "Luglio 2022"]
 
 sheetNamesLastFiveMonthsArr = ["Agosto 2022",
                                "Settembre 2022", "Orrobre 2022", "Novembre 2022", "Dicembre 2022"]
-# "Agosto 2022",
 
 pdfFolder = './DDT'
 

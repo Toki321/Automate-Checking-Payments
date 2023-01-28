@@ -35,14 +35,3 @@ def doesntContainWordsArr(contains314or318Arr, searchWordsArr, pdfFolder, fileNa
             except:
                 print("skipbecause it doiesnt exist even with 220 before it")
     return doesNOTContain
-
-
-# pdf_path = os.path.join(
-#     "./DDT", "DDT-3898_2021-IMPRESA-UNO-Snc-di-Conti-Giorgio--C.pdf")
-
-
-# reader = PyPDF2.PdfReader(pdf_path)
-# for page in reader.pages:
-#     pdf_text = page.extract_text()
-#     if isSearchWordsContainedInText(["tel"], pdf_text):
-#         print('contained')
