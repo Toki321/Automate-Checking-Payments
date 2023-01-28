@@ -3,6 +3,7 @@ excelFile.xlsx
 .~lock.excelFile.xlsx#
 DDT
 DDT.zip
-__pycache__
+**/__pycache__
 File names without needed words
 final
+filledDataFrame.csv
